@@ -1,25 +1,26 @@
 import React from "react";
 import { List } from "@fluentui/react-northstar";
 
-class VideoList extends React.Component {
-  render() {
-    return (
-      <List
+function VideoList(props) {
+  const { video, changeActive } = props;
+  return (
+    <List
+      navigable
+      styles={({ theme: { siteVariables } }) => ({
+        backgroundColor: siteVariables.colorScheme.default.background4,
+        color: "black",
+      })}
+    >
+      <List.Item
+        header={video.createdBy}
+        headerMedia={video.createdAt}
+        content={video.name}
         navigable
-        styles={({ theme: { siteVariables } }) => ({
-          backgroundColor: siteVariables.colorScheme.default.background4,color:"black"
-        })}
-      >
-        <List.Item
-          header={this.props.video.createdBy}
-          headerMedia={this.props.video.createdAt}
-          content={this.props.video.name}
-          navigable
-          index={0}
-        />
-      </List>
-    );
-  }
+        index={0}
+        onClick={() => changeActive(video)}
+      />
+    </List>
+  );
 }
 
 export default VideoList;
